@@ -1,5 +1,6 @@
 const photo1 = {
   "id": "1",
+  "topic": "nature",
   "location": {
     "city": "Montreal",
     "country": "Canada"
@@ -18,6 +19,7 @@ const photo1 = {
 
 const photo2 = {
   "id": "2",
+  "topic": "travel",
   "location": {
     "city": "Toronto",
     "country": "Canada"
@@ -36,6 +38,7 @@ const photo2 = {
 
 const photo3 = {
   "id": "3",
+  "topic": "animals",
   "location": {
     "city": "Ottawa",
     "country": "Canada"
@@ -54,6 +57,7 @@ const photo3 = {
 
 const photo4 = {
   "id": "4",
+  "topic": "people",
   "location": {
     "city": "Quebec",
     "country": "Canada"
@@ -73,6 +77,7 @@ const photo4 = {
 
 const photo5 = {
   "id": "5",
+  "topic": "nature",
   "location": {
     "city": "Vancouver",
     "country": "Canada"
@@ -91,6 +96,7 @@ const photo5 = {
 
 const photo6 =  {
   "id": "6",
+  "topic": "nature",
   "location": {
     "city": "Montreal",
     "country": "Canada"
@@ -109,6 +115,7 @@ const photo6 =  {
 
 const photo7 = {
   "id": "7",
+  "topic": "travel",
   "location": {
     "city": "Calgary",
     "country": "Canada"
@@ -127,6 +134,7 @@ const photo7 = {
 
 const photo8 = {
   "id": "8",
+  "topic": "animals",
   "location": {
     "city": "Ottawa",
     "country": "Canada"
@@ -145,6 +153,7 @@ const photo8 = {
 
 const photo9 = {
   "id": "9",
+  "topic": "nature",
   "location": {
     "city": "Nova Scotia",
     "country": "Canada"
@@ -163,6 +172,7 @@ const photo9 = {
 
 const photo10 = {
   "id": "10",
+  "topic": "nature",
   "location": {
     "city": "Edmonton",
     "country": "Canada"
