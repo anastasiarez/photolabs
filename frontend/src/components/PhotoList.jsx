@@ -1,14 +1,12 @@
 import React from "react";
 import PhotoListItem from './PhotoListItem';
+import photosMocks from "../mocks/photos";
 import "../styles/PhotoList.scss";
 import "../styles/PhotoListItem.scss";
-import photosMocks from "../mocks/photos";
 
-const PhotoList = ({ onChange, favouritesIds }) => {
-  const topic = location.pathname.split("/")[2];
-  const filteredPhotos = photosMocks.filter(
-    (photo) => photo.topic === topic
-  );
+const PhotoList = ({ onChange, favouritesIds, setModalOpen, showSimilarTopic, excludeId }) => {
+  const topic = showSimilarTopic ?  showSimilarTopic : location.pathname.split("/")[2];
+  const filteredPhotos = photosMocks.filter((photo) => photo.topic === topic);
   let photos = [];
 
   if (topic) {
@@ -17,14 +15,16 @@ const PhotoList = ({ onChange, favouritesIds }) => {
   } else {
     photos = photosMocks;
   }
+  
   const set = new Set(favouritesIds);
 
   return (
     <ul className="photo-list">
       {photos.length === 0 ? "No results" : null}
-      {photos.map((photo) => (
+      {photos.filter(photo => photo.id !== excludeId).map((photo) => (
         <PhotoListItem
           onChange={onChange}
+          setModalOpen={setModalOpen}
           checked={set.has(photo.id)}
           key={photo.id}
           data={photo}

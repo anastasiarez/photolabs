@@ -15,7 +15,7 @@ const PhotoListItem = (props) => {
         <PhotoFavButton
           checked={props.checked}
           toggleChecked={toggleChecked} />
-        <img
+        <img onClick={() => props.setModalOpen && props.setModalOpen(props.data)}
           className="photo-list-item__image"
           src={urls.regular}
           alt="Photo"

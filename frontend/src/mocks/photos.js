@@ -1,6 +1,6 @@
 const photo1 = {
   "id": "1",
-  "topic": "nature",
+  "topic": "travel",
   "location": {
     "city": "Montreal",
     "country": "Canada"
@@ -57,7 +57,7 @@ const photo3 = {
 
 const photo4 = {
   "id": "4",
-  "topic": "people",
+  "topic": "animals",
   "location": {
     "city": "Quebec",
     "country": "Canada"
@@ -77,7 +77,7 @@ const photo4 = {
 
 const photo5 = {
   "id": "5",
-  "topic": "nature",
+  "topic": "animals",
   "location": {
     "city": "Vancouver",
     "country": "Canada"
@@ -134,7 +134,7 @@ const photo7 = {
 
 const photo8 = {
   "id": "8",
-  "topic": "animals",
+  "topic": "travel",
   "location": {
     "city": "Ottawa",
     "country": "Canada"
@@ -153,7 +153,7 @@ const photo8 = {
 
 const photo9 = {
   "id": "9",
-  "topic": "nature",
+  "topic": "travel",
   "location": {
     "city": "Nova Scotia",
     "country": "Canada"
