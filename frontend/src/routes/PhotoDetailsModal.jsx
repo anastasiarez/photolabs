@@ -3,20 +3,22 @@ import PhotoList from 'components/PhotoList';
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoListItem from 'components/PhotoListItem';
+import useApplicationData from 'hooks/useApplicationData';
 
-const PhotoDetailsModal = ({close, item, onChange, favouritesIds}) => {
-  console.log(item);
-  const set = new Set(favouritesIds)
+const PhotoDetailsModal = () => {
+  const { modalItem, setModalOpen, ids } = useApplicationData();
+
+  const set = new Set(ids)
 
 
   return (
     <div className="photo-details-modal">
-      <button onClick={close} className="photo-details-modal__close-button">
+      <button onClick={() => setModalOpen(null)} className="photo-details-modal__close-button">
         
         <img src={closeSymbol} alt="close symbol" />
       </button>
-      <PhotoListItem data={item} onChange={onChange} checked={set.has(item.id)} />
-      <PhotoList onChange={onChange} favouritesIds={favouritesIds} showSimilarTopic={item.topic} excludeId={item.id} />
+      <PhotoListItem data={modalItem} checked={set.has(modalItem.id)} />
+      <PhotoList excludeId={modalItem.id} />
     </div>
   )
 };

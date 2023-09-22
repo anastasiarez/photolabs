@@ -9,10 +9,10 @@ export function getFavourites() {
   return favourites;
 }
 
-const HomeRoute = (props) => {
+const HomeRoute = () => {
   return (
     <div className="home-route">
-      <PhotoList onChange={props.onChange} favouritesIds={props.favouritesIds} setModalOpen={props.setModalOpen} />
+      <PhotoList />
     </div>
   );
 };

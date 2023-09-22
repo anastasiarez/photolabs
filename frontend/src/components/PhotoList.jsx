@@ -1,30 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PhotoListItem from './PhotoListItem';
-import photosMocks from "../mocks/photos";
+
 import "../styles/PhotoList.scss";
 import "../styles/PhotoListItem.scss";
+import useApplicationData from "hooks/useApplicationData";
 
-const PhotoList = ({ onChange, favouritesIds, setModalOpen, showSimilarTopic, excludeId }) => {
-  const topic = showSimilarTopic ?  showSimilarTopic : location.pathname.split("/")[2];
-  const filteredPhotos = photosMocks.filter((photo) => photo.topic === topic);
-  let photos = [];
+const PhotoList = ({ excludeId }) => {
+  const { photoData, setPhotos, topicData, ids } = useApplicationData();
 
-  if (topic) {
-    if (filteredPhotos.length) photos = filteredPhotos;
-    else photos = [];
-  } else {
-    photos = photosMocks;
-  }
-  
-  const set = new Set(favouritesIds);
+  useEffect(() => {
+    async function fetchPhotos() {
+      const response = await fetch("http://localhost:8001/api/photos");
+      const data = await response.json();
+      setPhotos(data);
+    }
+
+    const topicPath = location.pathname.split("/")[2];
+    const topic = topicData.find(topic => topic.slug === topicPath);
+
+    if (topicPath && topicData.length === 0) return
+
+
+    if (topic) {
+      async function fetchPhotosByTopic() {
+        const response = await fetch(`http://localhost:8001/api/topics/photos/${topic.id}`);
+        const data = await response.json();
+        setPhotos(data);
+      };
+      fetchPhotosByTopic();
+    } else {
+      fetchPhotos();
+    }
+  },
+    [topicData.length]);
+
+
+  const set = new Set(ids);
 
   return (
     <ul className="photo-list">
-      {photos.length === 0 ? "No results" : null}
-      {photos.filter(photo => photo.id !== excludeId).map((photo) => (
+      {photoData.filter(photo => photo.id !== excludeId).map((photo) => (
         <PhotoListItem
-          onChange={onChange}
-          setModalOpen={setModalOpen}
           checked={set.has(photo.id)}
           key={photo.id}
           data={photo}

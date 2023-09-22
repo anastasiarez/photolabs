@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useReducer, useContext, createContext } from 'react';
 
 // Helper function to get favourites from local storage
 function getFavourites() {
@@ -6,31 +6,92 @@ function getFavourites() {
   return favourites ? JSON.parse(favourites) : [];
 }
 
-function useApplicationData() {
-  const [modalItem, setModalOpen] = useState();
-  const [ids, toggle] = useState(getFavourites());
+const initialState = {
+  modalItem: null,
+  ids: getFavourites(),
+  photoData: [],
+  topicData: []
+};
 
-  // Function to toggle the favourite status
-  function onChange(item) {
-    const favourites = getFavourites();
-    const set = new Set(favourites);
+const DataContext = createContext(initialState)
 
-    if (set.has(item.id)) {
-      set.delete(item.id);
-    } else {
-      set.add(item.id);
-    }
 
-    localStorage.setItem('favourites', JSON.stringify([...set]));
-    toggle([...set]);
+// Define action types
+const SET_MODAL_OPEN = 'SET_MODAL_OPEN';
+const TOGGLE_FAVOURITE = 'TOGGLE_FAVOURITE';
+const SET_PHOTO_DATA = 'SET_PHOTO_DATA';
+const SET_TOPICS = 'SET_TOPICS';
+
+
+// Reducer function to handle state updates
+function reducer(state, action) {
+
+  switch (action.type) {
+    case SET_PHOTO_DATA:
+      return { ...state, photoData: action.payload };
+    case SET_TOPICS:
+      return { ...state, topicData: action.payload }; //from backend
+    case SET_MODAL_OPEN:
+      return { ...state, modalItem: action.payload };
+    case TOGGLE_FAVOURITE:
+      const favourites = [...state.ids];
+      const index = favourites.indexOf(action.payload);
+
+      if (index !== -1) {
+        favourites.splice(index, 1);
+      } else {
+        favourites.push(action.payload);
+      }
+
+      localStorage.setItem('favourites', JSON.stringify(favourites));
+      return { ...state, ids: favourites };
+
+    default:
+      return state;
   }
+}
 
-  return {
-    modalItem,
-    setModalOpen,
-    ids,
-    onChange,
+function useApplicationData() {
+  const state = useContext(DataContext)
+  return state
+}
+
+export function DataProvider({children}) {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  // Action creators
+  const setModalOpen = (item) => {
+    dispatch({ type: SET_MODAL_OPEN, payload: item });
   };
+
+  const setPhotos = (photos) => {
+    dispatch({ type: SET_PHOTO_DATA, payload: photos });
+  };
+
+  const setTopics = (topics) => {
+    dispatch({ type: SET_TOPICS, payload: topics });
+  };
+
+  const onChange = (item) => {
+    dispatch({ type: TOGGLE_FAVOURITE, payload: item.id });
+  };
+
+  const value = {
+    modalItem: state.modalItem,
+    setModalOpen,
+    setPhotos,
+    setTopics,
+    ids: state.ids,
+    onChange,
+    photoData: state.photoData,
+    topicData: state.topicData,
+  };
+
+  
+  return <DataContext.Provider value={value}>{children}</DataContext.Provider>
 }
 
 export default useApplicationData;
+
+
+

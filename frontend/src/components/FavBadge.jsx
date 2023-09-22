@@ -2,11 +2,15 @@ import React from 'react';
 import FavIcon from './FavIcon';
 
 import '../styles/FavBadge.scss';
+import useApplicationData from '../hooks/useApplicationData';
 
-const FavBadge = ({ isFavPhotoExist, selected }) => {
+const FavBadge = () => {
+  const {ids} = useApplicationData()
+  const selected = ids.length > 0
+  
   return (
     <div className='fav-badge'>
-      <FavIcon displayAlert={!!isFavPhotoExist} selected={selected} />
+      <FavIcon displayAlert={selected} selected={selected} />
     </div>
   )
 };

@@ -1,12 +1,14 @@
 import React from 'react';
 import PhotoFavButton from './PhotoFavButton';
 import '../styles/PhotoListItem.scss';
+import useApplicationData from 'hooks/useApplicationData';
 
 const PhotoListItem = (props) => {
+  const {onChange, setModalOpen, modalItem} = useApplicationData()
   const { location, urls, user } = props.data;
 
   const toggleChecked = () => {
-    props.onChange(props.data);
+    onChange(props.data);
   };
 
   return (
@@ -15,7 +17,7 @@ const PhotoListItem = (props) => {
         <PhotoFavButton
           checked={props.checked}
           toggleChecked={toggleChecked} />
-        <img onClick={() => props.setModalOpen && props.setModalOpen(props.data)}
+        <img onClick={() => !modalItem && setModalOpen(props.data)}
           className="photo-list-item__image"
           src={urls.regular}
           alt="Photo"
