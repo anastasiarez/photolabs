@@ -12,7 +12,7 @@ function PhotoFavButton(props) {
   return (
     <button
       onClick={handleClick}
-      className="PhotoFavButton">
+      className={"PhotoFavButton" + (checked ? " active" : "")}>
       <span><i>
         <FavIcon
           displayAlert={checked}

@@ -21,8 +21,8 @@ const PhotoListItem = (props) => {
           toggleChecked={toggleChecked} />
 
         <img onClick={() => !modalItem && setModalOpen(props.data)}
-          className="photo-list-item__image"
-          src={urls.regular}
+          className={`photo-list-item__image ${props.showBigPhoto && 'photo-list-item__big'}`}
+          src={props.showBigPhoto ? urls.full : urls.regular}
           alt="Photo"
         />
 

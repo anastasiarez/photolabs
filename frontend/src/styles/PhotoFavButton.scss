@@ -2,7 +2,7 @@
   position: absolute;
   top: 8px;
   left: 8px;
-  padding: 8px 7px; 
+  padding: 8px 7px;
   cursor: pointer;
   border-width: 0.0px;
   background-color: #eeeeee83;
@@ -10,4 +10,15 @@
   height: 32px;
   text-align: center;
   border-radius: 100%;
+}
+:root {
+  --elastic-out: linear(0, 0.2178 2.1%, 1.1144 8.49%,
+      1.0056 72.24%, 0.9981 86.66%, 1);
+}
+.PhotoFavButton {
+  transition: scale 0.5s var(--elastic-out);
+}
+.PhotoFavButton.active {
+  scale: 0.8;
+  transition: scale 0.5s ease;
 }

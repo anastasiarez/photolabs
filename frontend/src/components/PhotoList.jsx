@@ -5,7 +5,7 @@ import useApplicationData from "hooks/useApplicationData";
 import "../styles/PhotoList.scss";
 import "../styles/PhotoListItem.scss";
 
-const PhotoList = ({ excludeId }) => {
+const PhotoList = ({ similar }) => {
   const { photoData, setPhotos, topicData, ids } = useApplicationData();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const PhotoList = ({ excludeId }) => {
     const topic = topicData.find(topic => topic.slug === topicPath);
 
     if (topicPath && topicData.length === 0) return;
-
+    if (similar) return;
 
     if (topic) {
       async function fetchPhotosByTopic() {
@@ -39,7 +39,7 @@ const PhotoList = ({ excludeId }) => {
 
   return (
     <ul className="photo-list">
-      {photoData.filter(photo => photo.id !== excludeId).map((photo) => (
+      {(similar ?? photoData).map((photo) => (
         <PhotoListItem
           checked={set.has(photo.id)}
           key={photo.id}

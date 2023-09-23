@@ -6,8 +6,9 @@
   border-style: solid;
   border-radius: 8px;
   max-width: fit-content;
-  position: relative; /* Ensure a positioning context */
+  position: relative;
 }
+
 .photo-list-item__photo__container {
   position: relative;
   display: inline-block;
@@ -17,7 +18,7 @@
 
 .photo-list-item__image {
   user-select: none;
-  width: 300px;
+  width: 268px;
   height: 200px;
   object-fit: cover;
   border-radius: 10px;
@@ -28,6 +29,10 @@
   }
 }
 
+.photo-list-item__big {
+  width: 960px;
+  height: 4%;
+}
 
 .photo-list-item__user__container {
   display: flex;
@@ -47,7 +52,6 @@
 }
 
 .photo-list-item__user__username {
-  //display: flex;
   color: #080808;
   margin-top: 5px;
 }
