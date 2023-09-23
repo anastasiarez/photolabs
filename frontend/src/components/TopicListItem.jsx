@@ -2,10 +2,10 @@ import React from "react";
 import "../styles/TopicListItem.scss";
 
 
-const TopicListItem = ({topic}) => {
+const TopicListItem = ({ topic }) => {
   return (
     <div className="topic-list__item">
-        <a href={`/topics/${topic.title.toLowerCase()}`}>{topic.title}</a>
+      <a href={`/topics/${topic.title.toLowerCase()}`}>{topic.title}</a>
     </div>
   );
 };

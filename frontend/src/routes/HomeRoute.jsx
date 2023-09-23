@@ -1,6 +1,5 @@
 import React from 'react';
 import PhotoList from 'components/PhotoList';
-
 import '../styles/HomeRoute.scss';
 
 export function getFavourites() {

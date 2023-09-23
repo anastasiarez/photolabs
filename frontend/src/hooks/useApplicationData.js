@@ -13,14 +13,13 @@ const initialState = {
   topicData: []
 };
 
-const DataContext = createContext(initialState)
-
+const DataContext = createContext(initialState); //a way to pass data down the component tree without having to pass props manually at every level. It's a way to share data between components that are not directly connected in the component hierarchy.
 
 // Define action types
-const SET_MODAL_OPEN = 'SET_MODAL_OPEN';
-const TOGGLE_FAVOURITE = 'TOGGLE_FAVOURITE';
 const SET_PHOTO_DATA = 'SET_PHOTO_DATA';
 const SET_TOPICS = 'SET_TOPICS';
+const TOGGLE_FAVOURITE = 'TOGGLE_FAVOURITE';
+const SET_MODAL_OPEN = 'SET_MODAL_OPEN';
 
 
 // Reducer function to handle state updates
@@ -30,7 +29,7 @@ function reducer(state, action) {
     case SET_PHOTO_DATA:
       return { ...state, photoData: action.payload };
     case SET_TOPICS:
-      return { ...state, topicData: action.payload }; //from backend
+      return { ...state, topicData: action.payload };
     case SET_MODAL_OPEN:
       return { ...state, modalItem: action.payload };
     case TOGGLE_FAVOURITE:
@@ -52,11 +51,11 @@ function reducer(state, action) {
 }
 
 function useApplicationData() {
-  const state = useContext(DataContext)
-  return state
+  const state = useContext(DataContext); //useContext hook to access the data stored in the DataContext context.
+  return state;
 }
 
-export function DataProvider({children}) {
+export function DataProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // Action creators
@@ -87,8 +86,8 @@ export function DataProvider({children}) {
     topicData: state.topicData,
   };
 
-  
-  return <DataContext.Provider value={value}>{children}</DataContext.Provider>
+
+  return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }
 
 export default useApplicationData;

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import PhotoListItem from './PhotoListItem';
+import useApplicationData from "hooks/useApplicationData";
 
 import "../styles/PhotoList.scss";
 import "../styles/PhotoListItem.scss";
-import useApplicationData from "hooks/useApplicationData";
 
 const PhotoList = ({ excludeId }) => {
   const { photoData, setPhotos, topicData, ids } = useApplicationData();
@@ -18,7 +18,7 @@ const PhotoList = ({ excludeId }) => {
     const topicPath = location.pathname.split("/")[2];
     const topic = topicData.find(topic => topic.slug === topicPath);
 
-    if (topicPath && topicData.length === 0) return
+    if (topicPath && topicData.length === 0) return;
 
 
     if (topic) {
@@ -35,7 +35,7 @@ const PhotoList = ({ excludeId }) => {
     [topicData.length]);
 
 
-  const set = new Set(ids);
+  const set = new Set(ids); // create a new Set data structure and use the values from the ids array to initialize this set. It ensures that each value in the set is unique, and it automatically removes duplicates.
 
   return (
     <ul className="photo-list">
