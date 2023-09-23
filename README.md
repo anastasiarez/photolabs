@@ -17,7 +17,7 @@ The PhotoLabs project for the Web Development React course programming.
 
 ![larger_version_of_photo](https://github.com/anastasiarez/photolabs/blob/main/Photo%20liked.jpg)
 
-![favourite_image](docs/favourite_image.png)
+![favourite_image](https://github.com/anastasiarez/photolabs/blob/main/Modal%20open.jpg)
 # Setup
 
 Install dependencies with `npm install` in each respective `/frontend` and `/backend`.
