@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, createContext } from 'react';
+import React, { useReducer, useContext, createContext, useEffect } from 'react';
 
 // Helper function to get favourites from local storage
 function getFavourites() {
@@ -6,11 +6,20 @@ function getFavourites() {
   return favourites ? JSON.parse(favourites) : [];
 }
 
+function notImplemented() {
+  throw new Error('Method not implemented!')
+}
+
 const initialState = {
   modalItem: null,
-  ids: getFavourites(),
+  favourites: getFavourites(),
   photoData: [],
-  topicData: []
+  topicData: [],
+  setModalOpen: notImplemented,
+  setPhotos: notImplemented,
+  setTopics: notImplemented,
+  onChange: notImplemented,
+  fetchPhotosData: notImplemented
 };
 
 const DataContext = createContext(initialState); //a way to pass data down the component tree without having to pass props manually at every level. It's a way to share data between components that are not directly connected in the component hierarchy.
@@ -33,7 +42,7 @@ function reducer(state, action) {
     case SET_MODAL_OPEN:
       return { ...state, modalItem: action.payload };
     case TOGGLE_FAVOURITE:
-      const favourites = [...state.ids];
+      const favourites = [...state.favourites];
       const index = favourites.indexOf(action.payload);
 
       if (index !== -1) {
@@ -43,7 +52,7 @@ function reducer(state, action) {
       }
 
       localStorage.setItem('favourites', JSON.stringify(favourites));
-      return { ...state, ids: favourites };
+      return { ...state, favourites };
 
     default:
       return state;
@@ -57,6 +66,7 @@ function useApplicationData() {
 
 export function DataProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
+
 
   // Action creators
   const setModalOpen = (item) => {
@@ -75,17 +85,30 @@ export function DataProvider({ children }) {
     dispatch({ type: TOGGLE_FAVOURITE, payload: item.id });
   };
 
+  async function fetchPhotosData(topic) {
+    async function fetchPhotos() {
+      const response = await fetch("http://localhost:8001/api/photos");
+      return await response.json();
+    }
+
+    async function fetchPhotosByTopic() {
+      const response = await fetch(`http://localhost:8001/api/topics/photos/${topic.id}`);
+      return await response.json();
+    };
+
+    const photos = topic ? await fetchPhotosByTopic() : await fetchPhotos()
+
+    setPhotos(photos)
+  }
+
   const value = {
-    modalItem: state.modalItem,
+    ...state,
+    fetchPhotosData,
     setModalOpen,
     setPhotos,
     setTopics,
-    ids: state.ids,
     onChange,
-    photoData: state.photoData,
-    topicData: state.topicData,
   };
-
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }

@@ -6,9 +6,8 @@ import useApplicationData from 'hooks/useApplicationData';
 import '../styles/PhotoDetailsModal.scss';
 
 const PhotoDetailsModal = () => {
-  const { modalItem, setModalOpen, ids } = useApplicationData();
-  console.log(modalItem);
-  const set = new Set(ids);
+  const { modalItem, setModalOpen, favourites } = useApplicationData();
+  const set = new Set(favourites);
   const topicO = modalItem.similar;
 
   return (

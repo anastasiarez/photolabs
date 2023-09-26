@@ -6,7 +6,6 @@ function PhotoFavButton(props) {
   const { checked, toggleChecked } = props;
   const handleClick = () => {
     toggleChecked(); // This is a callback f-n that is passed from the parent componenet PhotoListItem. Executed when a button is clicked.
-    console.log('Props:', props);
   };
 
   return (
@@ -15,7 +14,7 @@ function PhotoFavButton(props) {
       className={"PhotoFavButton" + (checked ? " active" : "")}>
       <span><i>
         <FavIcon
-          displayAlert={checked}
+          displayAlert={false}
           selected={checked} />
       </i></span>
     </button>

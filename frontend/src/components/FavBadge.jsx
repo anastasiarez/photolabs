@@ -5,8 +5,8 @@ import useApplicationData from '../hooks/useApplicationData';
 import '../styles/FavBadge.scss';
 
 const FavBadge = () => {
-  const { ids } = useApplicationData();
-  const selected = ids.length > 0;
+  const { favourites } = useApplicationData();
+  const selected = favourites.length > 0;
 
   return (
     <div className='fav-badge'>
