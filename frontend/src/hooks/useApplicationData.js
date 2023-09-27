@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, createContext, useEffect } from 'react';
+import React, { useReducer, useContext, createContext } from 'react';
 
 // Helper function to get favourites from local storage
 function getFavourites() {
