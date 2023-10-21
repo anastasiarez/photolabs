@@ -1,4 +1,5 @@
 # react-photolabs
+PhotoLabs is a simple stock photo application - specifically a React-based single-page application (SPA) that allows users to view photos in different contexts.
 The PhotoLabs project for the Web Development React course programming.
 ## PhotoLab's features
 
